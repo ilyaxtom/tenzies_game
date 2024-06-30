@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Karla', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0B2434;
+    padding: 10px;
+}
+
+.Game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+    background-color: #F5F5F5;
+    padding: 35px;
+    border-radius: 10px;
+    max-width: 540px;
+}
+
+.dice-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    place-items: center;
+    gap: 30px;
+}
+
+.Die {
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Die:hover {
+    transform: scale(1.05);
+}
+
+.roll-btn {
+    border: none;
+    background-color: #5035FF;
+    padding: 10px;
+    width: 195px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.roll-btn:hover {
+    background-color: #3b26bf;
+}
+
+.title {
+    font-size: 45px;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #2B283A;
+}
+
+.description {
+    font-size: 20px;
+    text-align: center;
+    color: #4A4E74;
+}
