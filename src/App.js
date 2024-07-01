@@ -5,8 +5,9 @@ import Confetti from 'react-confetti'
 
 function App() {
   const [numbers, setNumbers] = React.useState( allNewDice() );
-
   const [tenzies, setTenzies] = React.useState(false);
+  const [score, setScore] = React.useState(0);
+  const [bestScore, setBestScore] = React.useState( localStorage.getItem("bestScore") );
 
   React.useEffect(() => {
     const allHeld = numbers.every(item => item.isHeld === true);
@@ -26,14 +27,18 @@ function App() {
     />
   ));
 
+  function createNewDice() {
+    return {
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid()
+    };
+  }
+
   function allNewDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push({
-        value: Math.ceil(Math.random() * 6),
-        isHeld: false,
-        id: nanoid()
-      })
+      newDice.push( createNewDice() );
     }
     return newDice;
   }
@@ -53,23 +58,29 @@ function App() {
     if (!tenzies) {
       setNumbers( prev => prev.map( item => {
         if (item.isHeld) return item
-        else {
-          return {
-            value: Math.ceil(Math.random() * 6),
-            isHeld: false,
-            id: nanoid()
-          }
-        }
+        else return createNewDice();
       }));
+      setScore(prev => ++prev);
     } else {
       setTenzies(false);
-      setNumbers(allNewDice());
+      setNumbers( allNewDice() );
+
+      setBestScore( bestScore === null ? score :
+          score < bestScore ? score :
+          bestScore
+      );
+      localStorage.setItem("bestScore", JSON.stringify(bestScore));
+      setScore(0);
     }
   }
 
   return (
     <main className="Game">
       {tenzies && <Confetti/>}
+      <div className="counter">
+        <span className="score">Score: {score}</span>
+        <span className="best-score">Best score: {bestScore}</span>
+      </div>
       <div className="text">
         <h1 className="title">Tenzies</h1>
         <div className="description">
