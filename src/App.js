@@ -65,11 +65,13 @@ function App() {
       setTenzies(false);
       setNumbers( allNewDice() );
 
-      setBestScore( bestScore === null ? score :
-          score < bestScore ? score :
-          bestScore
-      );
-      localStorage.setItem("bestScore", JSON.stringify(bestScore));
+      if (bestScore === null) {
+        localStorage.setItem("bestScore", score.toString());
+      }
+      else if (score < bestScore) {
+        localStorage.setItem("bestScore", score.toString());
+      }
+      setBestScore( JSON.parse(localStorage.getItem("bestScore")) );
       setScore(0);
     }
   }

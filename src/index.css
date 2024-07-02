@@ -24,6 +24,13 @@ body {
     max-width: 540px;
 }
 
+.counter {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 20px;
+}
+
 .dice-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
